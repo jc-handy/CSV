@@ -12,7 +12,8 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'csvtool=csvtool:main',  # Assumes your main script is __init__.py with a main function
+            # Your main script is __main__.py, which contains a main() function.
+            'csvtool = csvtool.__main__:main',
         ],
     },
     install_requires=[
