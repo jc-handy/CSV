@@ -1,7 +1,7 @@
 # CSV
 
 ## Description
-Use the csv command to read and write, CSV files. It's good for changing CSV dialects.
+Use the csvtool command to read and write, CSV files. It's good for changing CSV dialects.
 
 ## Installation
 If you don't have pipx installed either run `pip3 install pipx`, or if that gives you an "externally-managed-environment" complaint, use whatever package manager is right for your operating system.
@@ -10,6 +10,4 @@ If you don't have pipx installed either run `pip3 install pipx`, or if that give
 * [Red Hat](https://www.redhat.com/en/blog/how-manage-packages): `yum install pipx`
 * [HomeBrew](https://brew.sh): `brew install pipx`
 
-Once pipx is installed, run `pipx install csv` to install it to your `~/.local` directory. (Or run `pipx --global install csv` to install it for all users on your system.)
-
-
+Once pipx is installed, run `pipx install csvtool` to install it to your `~/.local` directory. (Or run `pipx --global install csvtool` to install it for all users on your system.)
