@@ -12,8 +12,8 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            # Your main script is __main__.py, which contains a main() function.
-            'CSV = CSV.__main__:main',
+            # Our CLI script is __main__.py, which contains a main() function.
+            'csv = CSV.__main__:main',
         ],
     },
     install_requires=[
