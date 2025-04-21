@@ -17,6 +17,8 @@ setup(
         ],
     },
     install_requires=[
+        'jc-debug',
+        'jc-handy-helpers',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',  # Or your desired status
