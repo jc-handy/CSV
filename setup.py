@@ -1,19 +1,19 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='csvtool',
+    name='jc-CSV',
     version='0.1.0',  # Or your desired version
     author='Jeff Clough', # Replace with your name
     author_email='jeff@cloughcottage.com', # Replace with your email
     description='A tool for manipulating MP3 metadata.',
     long_description=open('README.md').read(), #Optional, and create the README.md file
     long_description_content_type='text/markdown', #Optional
-    url='https://github.com/jc-handy/csvtool',
+    url='https://github.com/jc-handy/CSV',
     packages=find_packages(),
     entry_points={
         'console_scripts': [
             # Your main script is __main__.py, which contains a main() function.
-            'csvtool = csvtool.__main__:main',
+            'CSV = CSV.__main__:main',
         ],
     },
     install_requires=[
