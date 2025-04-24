@@ -10,4 +10,25 @@ If you don't have pipx installed either run `pip3 install pipx`, or if that give
 * [Red Hat](https://www.redhat.com/en/blog/how-manage-packages): `yum install pipx`
 * [HomeBrew](https://brew.sh): `brew install pipx`
 
-Once pipx is installed, run `pipx install jc-CSV` to install it to your `~/.local` directory. (Or run `pipx --global install jc-CSV` to install it for all users on your system.)
+Once pipx is installed, run `pipx install jc-CSV` to install the "csv" command to your `~/.local` directory. (Or run `pipx --global install jc-CSV` to install it for all users on your system.)
+
+## Usage
+```
+
+... coming "soon" ...
+
+```
+
+## Using This Project's CSV Wrapper in Your Own Project
+If you want to use the CSV wrapper module for Python's native csv module, include "jc-CSV" in your requirements.txt. Or if your project uses setup.py, you can tell your project to require the jc-CSV package in setup.py like this.
+```python
+from setuptools import setup, find_packages
+
+setup(
+...
+    install_requires=[
+        'jc-CSV',
+    ],
+...
+)
+```
