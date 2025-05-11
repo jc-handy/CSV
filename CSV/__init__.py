@@ -1,34 +1,3 @@
-"""# CSV
-The CSV module is a wrapper around Python's standard csv module that
-simplifies specifying and handling dialects. This makes them easy to
-store in config file or read from the command line. Everything else is
-just like Python's standard csv module.
-
-## Formatting the Dialect String
-CSV formatting is a loose standard with dialectic flexability. These are
-the parameters involved:
-
-* SEP: Field separator character. (default: ,)
-* Q: Quote character. (default: ")
-* END: Line ending. This can be C for carraige return (\\r), N for
-       newline (\\n), or B for both (\\r\\n). L for linefeed is the same
-       as N for newline (\\n). Any other character is taken litterally
-       and will be interpreted as end-of-line in an input file and will
-       terminate each row written to an output file.
-* QSTYLE: Quoting style. One of 'A' (all), 'M' (minimal, the default),
-          'N' (non-numeric), or 'X' (none).
-* DQUOTE: Represent a literal quote as two consecutive quotes. Either
-          'T' (for True, the default) or 'F' (for False).
-* ESC: The escape charater, which makes the next character a literal
-       Use 'N' for no escaping. (default: None)
-* SKIPWS: Skip whitespace immediately following a field separator. Either
-          'T' (for True, the default) or 'F' (for False).
-* STRICT: Raise exceptions on any little problem with the data. Either 'T'
-          (for True) or 'F' (for False, the default).
-
-The syntax of the string is SEP[Q[END[QSTYLE[DQUOTE[ESC[SKIPWS[STRICT]]]]]]].
-Any values you don't specify take their default values."""
-
 import csv,re
 from csv import *
 
@@ -40,7 +9,35 @@ __all__=csv.__all__+[
     'parse_dialect',
 ]
 
-CSV_DIALECT_DESCRIPTION="Coming Soon"
+DEFAULT_DIALECT_SPEC=',"BMT\\FF'
+
+CSV_DIALECT_DESCRIPTION=f"""\
+    ## Formatting the Dialect String
+    CSV formatting is a loose standard with dialectic flexability. These are
+    the parameters involved:
+
+    * SEP: Field separator character. (default: ,)
+    * Q: Quote character. (default: ")
+    * END: Line ending. This can be C for carraige return (\\r), N for
+           newline (\\n), or B for both (\\r\\n). L for linefeed is the same
+           as N for newline (\\n). Any other character is taken litterally
+           and will be interpreted as end-of-line in an input file and will
+           terminate each row written to an output file.
+    * QSTYLE: Quoting style. One of 'A' (all), 'M' (minimal, the default),
+              'N' (non-numeric), or 'X' (none).
+    * DQUOTE: Represent a literal quote as two consecutive quotes. Either
+              'T' (for True, the default) or 'F' (for False).
+    * ESC: The escape charater, which makes the next character a literal
+           Use 'N' for no escaping. (default: None)
+    * SKIPWS: Skip whitespace immediately following a field separator. Either
+              'T' (for True, the default) or 'F' (for False).
+    * STRICT: Raise exceptions on any little problem with the data. Either 'T'
+              (for True) or 'F' (for False, the default).
+
+    The syntax of the string is SEP[Q[END[QSTYLE[DQUOTE[ESC[SKIPWS[STRICT]]]]]]].
+    Any values you don't specify take their default values. The default dialect
+    string is {DEFAULT_DIALECT_SPEC!r}."""
+
 
 quoting_map=dict(
   A=QUOTE_ALL,
@@ -86,8 +83,6 @@ def dialect_string(dialect,style='spec'):
     s=f"{d.delimiter}{d.quotechar}{lt}{qt}{dq}{d.escapechar}{ss}{st}"
 
   return s
-
-DEFAULT_DIALECT_SPEC=',"BMT\\FF'
 
 # This regular expression matches a complete CSV dialect specification string.
 re_dialect=re.compile(
