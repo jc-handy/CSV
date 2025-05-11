@@ -37,7 +37,7 @@ __all__=csv.__all__+[
     'CSV_DIALECT_DESCRIPTION',
     'DEFAULT_DIALECT_SPEC',
     'dialect_string',
-    'parse_dialect'
+    'parse_dialect',
 ]
 
 CSV_DIALECT_DESCRIPTION="Coming Soon"

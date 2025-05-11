@@ -13,7 +13,7 @@ setup(
     entry_points={
         'console_scripts': [
             # Our CLI script is __main__.py, which contains a main() function.
-            'csvtool = CSV.__main__:main',
+            'csvtool = CSV.csvtool:main',
         ],
     },
     install_requires=[
