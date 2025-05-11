@@ -22,7 +22,7 @@ reading and writing needn't be the same and can be specified using the
 Regardless of which usage form is used, any data values given as command
 line arguments supply a row of data that will be appear as the first
 line of output. This is typically used to output column headings, (e.g.:
-'First name' Last\ name email account zipcode), but it could just as
+`'First name' Last\ name email account zipcode`), but it could just as
 easily be a row of actual data. Just in case it's not obvious, any data
 given on the command line in this way is not CSV-formatted. It is parsed
 by your shell, so use proper escapes and quoting to distinguish one
@@ -40,7 +40,7 @@ characters or normal ASCII characters are used to separate one column from
 another and heading rows from data rows. --outfmt=markdown is just like table
 output, but output is Markdown-formatted.
 
-FIELDSPEC Syntax:
+## FIELDSPEC Syntax
 A FIELDSPEC is made up of one or more ranges separated by commas. Each
 range is one of "N" (the Nth field), "N-" (from the Nth to the last
 field), or "N-M" (from the Nth to the Mth field, inclusive). Fields are
@@ -54,7 +54,7 @@ options:
 * --join JOINSPEC:      Join the given field range into a single field separated by a single character.
                         The first character of the JOINSPEC value is the field separator. The remainder
                         of JOINSPEC is the same field range syntax (FIELDSPEC) described below. Also,
-                        --join renumbers fields as they are joined. So if "--join ' 1-2'" is given,
+                        --join renumbers fields as they are joined. So if `--join ' 1-2'` is given,
                         fields 1 and 2 are joined as field 1, and any subsequent fields are renumbered
                         beginning with 2. This is important to remember if you're also using the --keep
                         option because --keep is evaluated after --join.
@@ -62,17 +62,17 @@ options:
                         row number (starting with 1) and row (as a list). The function must return
                         either the row, possibly modified, or None, in which case the current row is
                         discarded entirely, and processing continues with the new row.
-* --keep FIELDSPEC:     Output only these fields. See the "FIELDSPEC Syntax" section below. By default,
+* --keep FIELDSPEC:     Output only these fields. See the **FIELDSPEC Syntax** section below. By default,
                         all fields are kept (of course).
 * --headings N:         Set how many rows (lines) of heading data are in the input. (default: 0)
 * --infmt {csv,excel,shell}: Set the input format. See the usage and description above for details.
                         (default: 'csv')
-* --reader DIALECT:      Set the CSV reader's dialect. See CSV DIALECT SYNTAX below. (default:
+* --reader DIALECT:      Set the CSV reader's dialect. See **CSV Dialect Syntax** below. (default:
                         ',"BMT\\FF'
 * --outfmt OUTFMT:       Set either csv, shell, table, table-ascii, table-box, table-nosep, or markdown
                         as the output format. See the usage and description above for details.
                         (default: 'csv')
-* --writer DIALECT:      Set the CSV writer's dialect. See CSV DIALECT SYNTAX below. (default:
+* --writer DIALECT:      Set the CSV writer's dialect. See **CSV Dialect Syntax*** below. (default:
                         ',"BMT\\FF')
 * --worksheet NAME_or_NUMBER: Give the name or number (starting with 0) of the worksheet to read if --excel
                         was used. If not given, the first worksheet will be read.
@@ -80,7 +80,7 @@ options:
 * --test:               Run internal tests (for debugging purposes only).
 * --help, -h:           Show this help message and exit.
 
-## Formatting the Dialect String
+## CSV Dialect Syntax
 CSV formatting is a loose standard with dialectic flexability. These are
 the parameters involved:
 
