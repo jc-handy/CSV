@@ -53,7 +53,7 @@ positional arguments:
 options:
 * --join JOINSPEC:      Join the given field range into a single field separated by a single character.
                         The first character of the JOINSPEC value is the field separator. The remainder
-                        of JOINSPEC is the same field range syntax (FIELDSPEC) described above. Also,
+                        of JOINSPEC is the same field range syntax (FIELDSPEC) described below. Also,
                         --join renumbers fields as they are joined. So if "--join ' 1-2'" is given,
                         fields 1 and 2 are joined as field 1, and any subsequent fields are renumbered
                         beginning with 2. This is important to remember if you're also using the --keep
@@ -62,17 +62,17 @@ options:
                         row number (starting with 1) and row (as a list). The function must return
                         either the row, possibly modified, or None, in which case the current row is
                         discarded entirely, and processing continues with the new row.
-* --keep FIELDSPEC:     Output only these fields. See the "FIELDSPEC Syntax" section above. By default,
+* --keep FIELDSPEC:     Output only these fields. See the "FIELDSPEC Syntax" section below. By default,
                         all fields are kept (of course).
 * --headings N:         Set how many rows (lines) of heading data are in the input. (default: 0)
 * --infmt {csv,excel,shell}: Set the input format. See the usage and description above for details.
                         (default: 'csv')
-* --reader DIALECT:      Set the CSV reader's dialect. See CSV DIALECT SYNTAX above. (default:
+* --reader DIALECT:      Set the CSV reader's dialect. See CSV DIALECT SYNTAX below. (default:
                         ',"BMT\\FF'
 * --outfmt OUTFMT:       Set either csv, shell, table, table-ascii, table-box, table-nosep, or markdown
                         as the output format. See the usage and description above for details.
                         (default: 'csv')
-* --writer DIALECT:      Set the CSV writer's dialect. See CSV DIALECT SYNTAX above. (default:
+* --writer DIALECT:      Set the CSV writer's dialect. See CSV DIALECT SYNTAX below. (default:
                         ',"BMT\\FF')
 * --worksheet NAME_or_NUMBER: Give the name or number (starting with 0) of the worksheet to read if --excel
                         was used. If not given, the first worksheet will be read.
