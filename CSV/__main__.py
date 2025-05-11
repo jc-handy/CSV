@@ -1,8 +1,8 @@
 import argparse,contextlib,os,re,shlex,sys
 from functools import reduce
+import CSV as csv
 from handy import die,shellify
 from debug import DebugChannel
-import csvtool as csv
 
 # Make sure stdin and stdout are friendly to UTF-8 content.
 sys.stdin=open(sys.stdin.fileno(),mode='r',encoding='utf8',buffering=1)
@@ -10,8 +10,9 @@ sys.stdout=open(sys.stdout.fileno(),mode='w',encoding='utf8',buffering=1)
 
 dc=DebugChannel(False,label='D')
 
-# The gibberish the first character set is a string of international currency smbols
-# taken from https://economictimes.indiatimes.com/definition/currency-symbol.
+# The gibberish in the first part of the regular expression below
+# is a string of international currency smbols taken from
+# https://economictimes.indiatimes.com/definition/currency-symbol.
 re_numeric=re.compile(r"[$€£¥₣₹ﺪﻛﺇ﷼₻₽₾₺₼₸₴₷฿원₫₮₯₱₳₵₲₪₰]?(?P<int>[,0-9]+)?(?:\.(?P<decimal>\d+)?)?$")
 
 def numeric(x):
@@ -435,5 +436,5 @@ def main():
 
     return None
 
-if __name__=='__main__':
-    sys.exit(main())
+#if __name__=='__main__':
+#    sys.exit(main())

@@ -1,40 +1,52 @@
-#!/usr/bin/env python3
+"""# CSV
+The CSV module is a wrapper around Python's standard csv module that
+simplifies specifying and handling dialects. This makes them easy to
+store in config file or read from the command line. Everything else is
+just like Python's standard csv module.
 
-import re
-from csv import *
+## Formatting the Dialect String
+CSV formatting is a loose standard with dialectic flexability. These are
+the parameters involved:
 
-__all__=["CSV_DIALECT_DESCRIPTION","DEFAULT_DIALECT_SPEC","Dialect","DictReader","DictWriter","Error","QUOTE_ALL","QUOTE_MINIMAL","QUOTE_NONE","QUOTE_NONNUMERIC","Sniffer","__doc__","__version__","dialect_string","excel","excel_tab","field_size_limit","get_dialect","list_dialects","parse_dialect","reader","register_dialect","unix_dialect","unregister_dialect","writer"]
-
-CSV_DIALECT_DESCRIPTION="""\
-CSV formatting is a loose standard with dialectic flexability. These are the
-parameters involved:
-
-    SEP:     Field separator character. (default: ,)
-    Q:       Quote character. (default: ")
-    END:     Line ending. This can be C for carraige return (\\r), N for
-             newline (\\n), or B for both (\\r\\n). L for linefeed is the same
-             as N for newline (\\n). Any other character is taken litterally
-             and will be interpreted as end-of-line in an input file and will
-             terminate each row written to an output file.
-    QSTYLE:  Quoting style. One of 'a' (all), 'm' (minimal, the default),
-             'N' (non-numeric), or 'x' (none).
-    DQUOTE:  Represent a literal quote as two consecutive quotes. Either
-             't' (for True, the default) or 'f' (for False).
-    ESC:     The escape charater, which makes the next character a literal
-             Use 'N' for no escaping. (default: None)
-    SKIPWS:  Skip whitespace immediately following a field separator. Either
-             't' (for True, the default) or 'f' (for False).
-    STRICT:  Raise exceptions on any little problem with the data. Either 't'
-             (for True) or 'f' (for False, the default).
+* SEP: Field separator character. (default: ,)
+* Q: Quote character. (default: ")
+* END: Line ending. This can be C for carraige return (\\r), N for
+       newline (\\n), or B for both (\\r\\n). L for linefeed is the same
+       as N for newline (\\n). Any other character is taken litterally
+       and will be interpreted as end-of-line in an input file and will
+       terminate each row written to an output file.
+* QSTYLE: Quoting style. One of 'A' (all), 'M' (minimal, the default),
+          'N' (non-numeric), or 'X' (none).
+* DQUOTE: Represent a literal quote as two consecutive quotes. Either
+          'T' (for True, the default) or 'F' (for False).
+* ESC: The escape charater, which makes the next character a literal
+       Use 'N' for no escaping. (default: None)
+* SKIPWS: Skip whitespace immediately following a field separator. Either
+          'T' (for True, the default) or 'F' (for False).
+* STRICT: Raise exceptions on any little problem with the data. Either 'T'
+          (for True) or 'F' (for False, the default).
 
 The syntax of the string is SEP[Q[END[QSTYLE[DQUOTE[ESC[SKIPWS[STRICT]]]]]]].
 Any values you don't specify take their default values."""
 
+import csv,re
+from csv import *
+
+# Add CSV's "exported" values to those of the standard csv module.
+__all__=csv.__all__+[
+    'CSV_DIALECT_DESCRIPTION',
+    'DEFAULT_DIALECT_SPEC',
+    'dialect_string',
+    'parse_dialect'
+]
+
+CSV_DIALECT_DESCRIPTION="Coming Soon"
+
 quoting_map=dict(
-  a=QUOTE_ALL,
-  m=QUOTE_MINIMAL,
-  n=QUOTE_NONNUMERIC,
-  x=QUOTE_NONE
+  A=QUOTE_ALL,
+  M=QUOTE_MINIMAL,
+  N=QUOTE_NONNUMERIC,
+  X=QUOTE_NONE
 )
 
 reverse_quoting_map={v:k for k,v in quoting_map.items()}
@@ -43,7 +55,7 @@ lineterminator_map=dict(
   B='\r\n',
   C='\r',
   L='\n',
-  N='\n',
+  N='\n' # N functions as an alias for L.
 )
 
 reverse_lineterminator_map={v:k for k,v in lineterminator_map.items() if k!='N'}
@@ -75,7 +87,7 @@ def dialect_string(dialect,style='spec'):
 
   return s
 
-DEFAULT_DIALECT_SPEC=',"Bmt\\ff'
+DEFAULT_DIALECT_SPEC=',"BMT\\FF'
 
 # This regular expression matches a complete CSV dialect specification string.
 re_dialect=re.compile(
@@ -83,37 +95,18 @@ re_dialect=re.compile(
   '(?P<delimiter>.)'
   '(?P<quotechar>.)'
   '(?P<lineterminator>.)'
-  '(?P<quoting>[amnx])'
-  '(?P<doublequote>[ft])'
+  '(?P<quoting>[AMNX])'
+  '(?P<doublequote>[FT])'
   '(?P<escapechar>.)'
-  '(?P<skipinitialspace>[ft])'
-  '(?P<strict>[ft])'
+  '(?P<skipinitialspace>[FT])'
+  '(?P<strict>[FT])'
   '$'
 )
 
 def parse_dialect(dialect_name,dialect_spec):
   """Parse a dialect string, register the dialect by name, and
-  return the parsed dialect.
-
-  CSV formatting is a loose standard with dialectic flexability. These are the
-  parameters involved:
-
-      SEP:     Field separator character. (default: ,)
-      Q:       Quote character. (default: ")
-      LT:      Line terminator.
-      QSTYLE:  Quoting style. One of 'a' (all), 'm' (minimal, the
-               default), 'N' (non-numeric), or 'n' (none).
-      DQUOTE:  Represent a literal quote as two consecutive quotes.
-               Either 't' (for True, the default) or 'f' (for False).
-      ESC:     The escape charater, which makes the next character a
-               literal. Use 'N' for no escaping. (default: None)
-      SKIPWS:  Skip whitespace immediately following a field separator.
-               Either 't' (for True) or 'f' (for False, the default).
-      STRICT:  Strict more raises more Error exceptions. Either 't' (for
-               True) or 'f' (for False, the default).
-
-  All this put together is SEP[Q[LT[QSTYLE[DQUOTE[ESC[SKIPWS[STRICT]]]]]]].
-  This is a single string of up to seven characters."""
+  return the parsed dialect. See "Formatting the Dialect String" above
+  for what dialect_spec looks like."""
 
   # Supply defaults for any unspecified elements of the dialect string.
   if len(dialect_spec)>len(DEFAULT_DIALECT_SPEC):
@@ -156,6 +149,4 @@ def parse_dialect(dialect_name,dialect_spec):
   })
   register_dialect(dialect_name,dialect_class)
   return get_dialect(dialect_name)
-
-from .__main__ import main
 
